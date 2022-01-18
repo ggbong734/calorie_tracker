@@ -23,8 +23,52 @@
     </nav>
     <div class="collapse" id="optionPage">
         <div class="card card-body">
-            Some placeholder content for the first collapse component of this multi-collapse example.
-            This panel is hidden by default but revealed when the user activates the relevant trigger.
+            <h6 class="option-heading">Gender</h6>
+            <div class="div-gender" role="group" aria-label="Gender radio button group">
+                <input type="radio" class="btn-check btn-group-gender" name="btnradiogender" id="btnradioMale" checked>
+                <label class="btn btn-outline-primary" for="btnradioMale">Male</label>
+
+                <input type="radio" class="btn-check btn-group-gender" name="btnradiogender" id="btnradioFemale">
+                <label class="btn btn-outline-primary" for="btnradioFemale">Female</label>
+
+            </div>
+            <h6 class="option-heading pt-2">Age Group</h6>
+            <div class="div-age" role="group" aria-label="Age radio button group">
+                <input type="radio" class="btn-check btn-group-age" name="btnradioage" id="btnradio4-8">
+                <label class="btn btn-outline-primary" for="btnradio4-8">4-8</label>
+
+                <input type="radio" class="btn-check btn-group-age" name="btnradioage" id="btnradio9-13">
+                <label class="btn btn-outline-primary" for="btnradio9-13">9-13</label>
+
+                <input type="radio" class="btn-check btn-group-age" name="btnradioage" id="btnradio14-18">
+                <label class="btn btn-outline-primary" for="btnradio14-18">14-18</label>
+
+                <input type="radio" class="btn-check btn-group-age" name="btnradioage" id="btnradio19-30">
+                <label class="btn btn-outline-primary" for="btnradio19-30">19-30</label>
+
+                <input type="radio" class="btn-check btn-group-age" name="btnradioage" id="btnradio31-50" checked>
+                <label class="btn btn-outline-primary" for="btnradio31-50">31-50</label>
+
+                <input type="radio" class="btn-check btn-group-age" name="btnradioage" id="btnradio51+">
+                <label class="btn btn-outline-primary" for="btnradio51+">51+</label>
+            </div>
+            <h6 class="option-heading pt-2">Activity Level</h6>
+            <div class="div-activity" role="group" aria-label="Activity radio button group">
+                <input type="radio" class="btn-check btn-group-activity" name="btnradioactivity" id="btnradioSedentary"
+                    checked>
+                <label class="btn btn-outline-primary" for="btnradioSedentary">Sedentary</label>
+
+                <input type="radio" class="btn-check btn-group-activity" name="btnradioactivity"
+                    id="btnradioModerately Active">
+                <label class="btn btn-outline-primary" for="btnradioModerately Active">Moderately Active</label>
+
+                <input type="radio" class="btn-check btn-group-activity" name="btnradioactivity" id="btnradioActive">
+                <label class="btn btn-outline-primary" for="btnradioActive">Active</label>
+            </div>
+            <div class="d-grid gap-2 col-4 mx-auto pt-4">
+                <button id="saveButton" class="btn btn-outline-success" type="button">Save Selection</button>
+            </div>
+
         </div>
     </div>
     <div>

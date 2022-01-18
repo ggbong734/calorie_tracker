@@ -13,7 +13,13 @@ class Setting {
     constructor(gender, ageGroup, activity) {
         this.gender = gender;
         this.ageGroup = ageGroup;
-        this.activity = activity
+        this.activity = activity;
+    }
+
+    getCaloriesPerDay() {
+        console.log("gender", this.gender);
+        console.log(calIntakeNeeds[this.gender]);
+        return calIntakeNeeds[this.gender][this.ageGroup][this.activity];
     }
 }
 
@@ -30,10 +36,35 @@ function getFoodInfo(consum) {
         .then(response => response.json());
 }
 
+function confirmSettings() {
 
+}
+
+function getSelectedSetting(htmlTag) {
+    let result = null;
+    document.querySelectorAll(htmlTag).forEach(b => {
+        if (b.checked) {
+            result = b.id.slice(8);
+        }
+    });
+    return result;
+}
 
 function displayCurrItems(listOfCons) {
-    let calRemaining = 2200; // change this based on option settings
+
+    // pull settings from chrome storage
+
+    let ageSetting = getSelectedSetting(".btn-group-age");
+    let genderSetting = getSelectedSetting(".btn-group-gender");
+    let activitySetting = getSelectedSetting(".btn-group-activity");
+    let setting = new Setting(genderSetting, ageSetting, activitySetting);
+    let calRemaining = setting.getCaloriesPerDay();
+
+    document.getElementById("saveButton").addEventListener("click", () => {
+        displayCurrItems(listOfCons);
+        // save settings in the chrome storage
+    });
+
     let totalConsumed = 0;
     // get total remaining calories and show
     listOfCons.forEach((item) => {
