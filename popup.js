@@ -50,16 +50,47 @@ function getSelectedSetting(htmlTag) {
     return result;
 }
 
-function displayCurrItems(listOfCons) {
+function checkRadioBoxes(savedSetting) {
 
-    // pull settings from chrome storage
+    document.querySelectorAll(".btn-group-age").forEach(b => {
+        if (b.id.slice(8) === savedSetting[1]) {
+            b.checked = true;
+        }
+    });
 
-    let ageSetting = getSelectedSetting(".btn-group-age");
-    let genderSetting = getSelectedSetting(".btn-group-gender");
-    let activitySetting = getSelectedSetting(".btn-group-activity");
+    document.querySelectorAll(".btn-group-gender").forEach(b => {
+        if (b.id.slice(8) === savedSetting[0]) {
+            b.checked = true;
+        }
+    });
+
+    document.querySelectorAll(".btn-group-activity").forEach(b => {
+        if (b.id.slice(8) === savedSetting[2]) {
+            b.checked = true;
+        }
+    });
+}
+
+function displayCurrItems(listOfCons, savedSetting = []) {
+    console.log("saved setting: ", savedSetting);
+    let ageSetting, genderSetting, activitySetting;
+    // pull settings from chrome storage if available, else get from selected box
+    if (Array.isArray(savedSetting) && savedSetting.length > 1) {
+        genderSetting = savedSetting[0];
+        ageSetting = savedSetting[1];
+        activitySetting = savedSetting[2];
+        checkRadioBoxes(savedSetting);
+    } else {
+        ageSetting = getSelectedSetting(".btn-group-age");
+        genderSetting = getSelectedSetting(".btn-group-gender");
+        activitySetting = getSelectedSetting(".btn-group-activity");
+        saveOptionSettings(genderSetting, ageSetting, activitySetting);
+    }
     let setting = new Setting(genderSetting, ageSetting, activitySetting);
+
     let calRemaining = setting.getCaloriesPerDay();
 
+    //event listener for setting
     document.getElementById("saveButton").addEventListener("click", () => {
         displayCurrItems(listOfCons);
         // save settings in the chrome storage
@@ -140,8 +171,8 @@ function saveConsumablesandDate(listOfCons) {
     chrome.storage.sync.set({ "lastDate": Date.now() });
 }
 
-function saveOptionSettings() {
-
+function saveOptionSettings(gender, age, activity) {
+    chrome.storage.sync.set({ "setting": [gender, age, activity] });
 }
 
 function getDiffInDays(date1, date2) {
@@ -164,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
     chrome.runtime.connect({ name: "popup" });
 
     // extract stored list from chrome storage
-    chrome.storage.sync.get(["consumables", "date", "pastCalories", "options"], function (result) {
+    chrome.storage.sync.get(["consumables", "date", "pastCalories", "setting"], function (result) {
         // if current date is different from last date, save new date and push last date data into pastCalories
         if (!result) {
             console.log('retrieval from storage returns nothing');
@@ -174,6 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const currDate = Date.now();
         const lastDate = result.date;
         const lastCons = result.consumables;
+        const savedSetting = result.setting;
 
         if (result.date && getDiffInDays(currDate, lastDate) > 0) {
             // save new date
@@ -204,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // get option settings and apply
-        displayCurrItems(listOfCons);
+        displayCurrItems(listOfCons, savedSetting);
     });
 
     // chrome storage structure: 1. consumable list current 2. last consumable date 3. list of pastCalories
