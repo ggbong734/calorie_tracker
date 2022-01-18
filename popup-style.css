@@ -1,0 +1,16 @@
+.calorie-tracker-body {
+    height: 700px;
+    width: 500px
+}
+
+.calorie-box{
+    border: 1px solid red;
+}
+
+.calorie-table{
+    border: 1px solid red;
+}
+
+.item-input {
+    border: 1px solid red;
+}

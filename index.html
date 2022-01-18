@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="asset/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="popup-style.css">
+</head>
+
+<body class="calorie-tracker-body">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="/img/hamburger_400.jpg" alt="" width="24" height="24" class="d-inline-block align-text-top">
+                Calorie Tracker
+            </a>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#optionPage"
+                aria-expanded="false" aria-controls="optionPage">
+                Options
+            </button>
+        </div>
+    </nav>
+    <div class="collapse" id="optionPage">
+        <div class="card card-body">
+            Some placeholder content for the first collapse component of this multi-collapse example.
+            This panel is hidden by default but revealed when the user activates the relevant trigger.
+        </div>
+    </div>
+    <div>
+        <button type="button" class="btn btn-danger">Danger</button>
+    </div>
+    <div class="calorie-box">
+        <h4>Daily Remaining Calories:</h4>
+        <h2 id='calories-remaining'></h2>
+    </div>
+    <div class="calorie-table">
+        <table id="calTable" class="table">
+            <thead id="calTableHead">
+            </thead>
+            <tbody id="calTableBody">
+            </tbody>
+        </table>
+        <h5 id="totalConsumed">Total consumed=</h5>
+    </div>
+    <div class="item-input input-group">
+        <input id="quantityInput" type="text" aria-label="Quantity" placeholder="1" class="form-control">
+        <input id="unitInput" type="text" aria-label="Unit" placeholder="cup" class="form-control">
+        <input id="itemInput" type="text" class="form-control" placeholder="rice">
+        <button id="addConsButton" class="btn btn-outline-secondary" type="button" id="button-addon2">Add</button>
+    </div>
+
+    <script src="./popup.js"></script>
+    <script src="./const.js"></script>
+    <script src="./background.js"></script>
+    <script src="asset/bootstrap.bundle.min.js"></script>
+</body>
+
+
+
+
+</html>
